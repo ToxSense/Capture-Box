@@ -1,0 +1,17 @@
+import qmc5883l, subprocess
+from time import sleep
+try:
+    sensor = qmc5883l.QMC5883L()
+except:
+    pass
+
+result = subprocess.run(['i2cdetect', '-y', '1'], stdout=subprocess.PIPE)
+print(result.stdout)
+
+while True:
+    try:
+        m = sensor.get_magnet()
+        print(m)
+    except:
+        pass
+    sleep(1)
